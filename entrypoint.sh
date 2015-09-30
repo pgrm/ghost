@@ -1,6 +1,12 @@
 #!/bin/bash
 set -e
 
+sed -ir "s/var ga_ua = '.*';/var ga_ua = '$GA_UA';/g;
+		s/var disqus_shortname = '.*'/var disqus_shortname = '$DISQUS_SHORTNAME'/g"
+	"$GHOST_SOURCE/content/themes/Perfetta-Free-Ghost-Theme/partials/config.hbs"
+
+sed -ir "s#url: '.*'#$URL/g" "$GHOST_SOURCE/config.js"
+
 if [[ "$*" == npm*start* ]]; then
 	for dir in "$GHOST_SOURCE/content"/*/; do
 		targetDir="$GHOST_CONTENT/$(basename "$dir")"
@@ -23,11 +29,5 @@ if [[ "$*" == npm*start* ]]; then
 
 	set -- gosu user "$@"
 fi
-
-sed -ir "s/var ga_ua = '.*';/var ga_ua = '$GA_UA';/g;
-		s/var disqus_shortname = '.*'/var disqus_shortname = '$DISQUS_SHORTNAME'/g"
-	"$GHOST_CONTENT/content/themes/Perfetta-Free-Ghost-Theme-v.1.5.0/partials/config.hbs"
-
-sed -ir "s#url: '.*'#$URL/g" "$GHOST_SOURCE/config.js"
 
 exec "$@"
