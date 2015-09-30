@@ -5,7 +5,11 @@ sed -ir "s/var ga_ua = '.*';/var ga_ua = '$GA_UA';/g;
 		s/var disqus_shortname = '.*'/var disqus_shortname = '$DISQUS_SHORTNAME'/g" \
 	"$GHOST_SOURCE/content/themes/Perfetta-Free-Ghost-Theme/partials/config.hbs"
 
-sed -ir "s#url: '.*'#$URL/g" "$GHOST_SOURCE/config.example.js"
+echo "sed 1 completed"
+
+sed -ir "s#url: '.*'#$URL#g" "$GHOST_SOURCE/config.example.js"
+
+echo "sed 2 completed"
 
 if [[ "$*" == npm*start* ]]; then
 	for dir in "$GHOST_SOURCE/content"/*/; do
