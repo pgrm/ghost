@@ -1,26 +1,11 @@
 #!/bin/bash
 set -e
 
-echo "ls -als $GHOST_SOURCE"
-ls -als $GHOST_SOURCE
-
-echo "ls -als $GHOST_SOURCE/content"
-ls -als $GHOST_SOURCE/content
-
-echo "ls -als $GHOST_SOURCE/content/themes"
-ls -als $GHOST_SOURCE/content/themes
-
-echo "ls -als $GHOST_SOURCE/content/themes/Perfetta-Free-Ghost-Theme"
-ls -als $GHOST_SOURCE/content/themes/Perfetta-Free-Ghost-Theme
-
-echo "ls -als $GHOST_SOURCE/content/themes/Perfetta-Free-Ghost-Theme/partials"
-ls -als $GHOST_SOURCE/content/themes/Perfetta-Free-Ghost-Theme/partials
-
 sed -ir "s/var ga_ua = '.*';/var ga_ua = '$GA_UA';/g;
 		s/var disqus_shortname = '.*'/var disqus_shortname = '$DISQUS_SHORTNAME'/g"
 	"$GHOST_SOURCE/content/themes/Perfetta-Free-Ghost-Theme/partials/config.hbs"
 
-sed -ir "s#url: '.*'#$URL/g" "$GHOST_SOURCE/config.js"
+sed -ir "s#url: '.*'#$URL/g" "$GHOST_SOURCE/config.example.js"
 
 if [[ "$*" == npm*start* ]]; then
 	for dir in "$GHOST_SOURCE/content"/*/; do
