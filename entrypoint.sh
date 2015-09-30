@@ -26,7 +26,7 @@ fi
 
 sed -ir "s/var ga_ua = '.*';/var ga_ua = '$GA_UA';/g;
 		s/var disqus_shortname = '.*'/var disqus_shortname = '$DISQUS_SHORTNAME'/g"
-	"$GHOST_CONTENT/content/themes/Perfetta-Free-Ghost-The/partials/config.hbs"
+	"$GHOST_CONTENT/content/themes/Perfetta-Free-Ghost-Theme-v.1.5.0/partials/config.hbs"
 
 sed -ir "s#url: '.*'#$URL/g" "$GHOST_SOURCE/config.js"
 
